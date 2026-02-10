@@ -353,7 +353,7 @@
       /* 沿着爱心路径漂浮的小爱心粒子（使用伪元素模拟） */
       .heart-wrapper::before,
       .heart-wrapper::after {
-        content: "❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤";
+        content: "♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ";
         position: absolute;
         inset: 12%;
         color: #ff8ac8;
@@ -523,7 +523,7 @@
             <div class="env-greetings-main">赐 · 叶佳颖</div>
             <div class="env-greetings-sub">有一封皇帝诏书给你</div>
           </div>
-          <div class="env-heart-stamp">❤</div>
+          <div class="env-heart-stamp">♡</div>
           <div class="env-open-tip">
             <span class="env-open-tip-dot"></span>
             <span>点击接旨</span>
@@ -570,7 +570,7 @@
 
     <!-- 先随便放一首背景音乐：示例使用公共示例音频，可后续替换 -->
     <audio id="bgm" preload="auto" loop>
-      <source src="https://samplelib.com/lib/preview/mp3/sample-3s.mp3" type="audio/mpeg" />
+      <source src="./aaa.mp3" type="audio/mpeg" />
     </audio>
 
     <script>
@@ -581,7 +581,7 @@
         const rainLayer = document.getElementById("rain-layer");
         if (!rainLayer) return;
 
-        const charset = ["❤", "LOVE", "❤", "❤"];
+        const charset = ["♡", "LOVE","♡", "♡"];
         const colCount = 26; // 列数更多，雨更密集
         const layerWidth = rainLayer.clientWidth || window.innerWidth;
 

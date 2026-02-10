@@ -49,29 +49,19 @@
 
       .float-item {
         position: absolute;
-        color: #ff84c9;
         font-size: 10px;
-        opacity: 0.18;
-        animation: floatUp 12s linear infinite;
+        animation: floatUp 14s linear infinite;
         text-shadow:
-          0 0 6px rgba(255, 158, 214, 0.9),
-          0 0 12px rgba(255, 82, 180, 0.7);
-      }
+          0 0 4px rgba(255, 190, 230, 0.8),
+          0 0 10px rgba(255, 150, 210, 0.7);
 
-      .float-item.love-text {
-        font-size: 12px;
-        opacity: 0.14;
-        letter-spacing: 0.15em;
-      }
-
-      /* 利用自定义属性实现从上到下透明度 / 颜色渐变 */
-      .float-item {
-        --depth: 0.5;
-        opacity: calc(0.18 + var(--depth) * 0.25);
+        /* 利用自定义属性实现从下到上透明度 / 颜色渐变（浅粉 → 更亮粉） */
+        --depth: 0.5; /* 0 = 底部, 1 = 顶部 */
+        opacity: calc(0.12 + var(--depth) * 0.45);
         color: rgb(
           255,
-          calc(110 + var(--depth) * 60),
-          calc(180 + var(--depth) * 40)
+          calc(150 + var(--depth) * 70),
+          calc(190 + var(--depth) * 60)
         );
       }
 
@@ -250,33 +240,36 @@
 
       .column {
         position: absolute;
-        top: -120%;
-        width: 12px;
-        color: #ff4da6;
-        opacity: 0.12;
-        font-size: 14px;
-        letter-spacing: 2px;
+        top: -140%;
+        width: 10px;
+        color: rgba(236, 176, 193, 0.6);
+        opacity: 0.28;
+        font-size: 10px;
+        letter-spacing: 3px;
         text-align: center;
         writing-mode: vertical-rl;
         text-orientation: mixed;
         animation-name: fall;
         animation-timing-function: linear;
         animation-iteration-count: infinite;
+        text-shadow:
+          0 0 8px rgba(255, 170, 230, 0.9),
+          0 0 16px rgba(255, 110, 210, 0.85);
       }
 
       @keyframes fall {
         0% {
-          transform: translate3d(0, -10%, 0);
+          transform: translate3d(0, -20%, 0);
           opacity: 0;
         }
         10% {
-          opacity: 0.4;
+          opacity: 0.5;
         }
         80% {
-          opacity: 0.4;
+          opacity: 0.7;
         }
         100% {
-          transform: translate3d(0, 140%, 0);
+          transform: translate3d(0, 150%, 0);
           opacity: 0;
         }
       }
@@ -310,16 +303,16 @@
           transform: scale(1);
         }
         10% {
-          transform: scale(1.06);
+          transform: scale(1.14);
         }
         35% {
-          transform: scale(1.02);
+          transform: scale(1.06);
         }
         50% {
-          transform: scale(1.08);
+          transform: scale(1.18);
         }
         70% {
-          transform: scale(1);
+          transform: scale(1.02);
         }
       }
 
@@ -360,7 +353,7 @@
       /* 沿着爱心路径漂浮的小爱心粒子（使用伪元素模拟） */
       .heart-wrapper::before,
       .heart-wrapper::after {
-        content: "❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤";
+        content: "❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤ ❤";
         position: absolute;
         inset: 12%;
         color: #ff8ac8;
@@ -383,16 +376,49 @@
 
       @keyframes twinkle {
         0% {
-          transform: rotate(0deg) scale(1);
-          opacity: 0.8;
+          transform: rotate(0deg) scale(0.95);
+          opacity: 0.7;
         }
         50% {
-          transform: rotate(2deg) scale(1.05);
+          transform: rotate(3deg) scale(1.08);
           opacity: 1;
         }
         100% {
-          transform: rotate(0deg) scale(1);
-          opacity: 0.8;
+          transform: rotate(0deg) scale(0.96);
+          opacity: 0.7;
+        }
+      }
+
+      /* 从大爱心中心“蹦出”的小爱心粒子 */
+      .heart-pop {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #ffe1f4;
+        font-size: 14px;
+        text-shadow:
+          0 0 6px rgba(255, 190, 235, 0.9),
+          0 0 14px rgba(255, 120, 200, 0.8);
+        pointer-events: none;
+        animation: popUp 2.4s ease-out forwards;
+      }
+
+      @keyframes popUp {
+        0% {
+          transform: translate(-50%, -50%) scale(0.4);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(
+              calc(-50% + var(--dx, 0px)),
+              calc(-50% + var(--dy, -40px))
+            )
+            scale(1.2);
+          opacity: 0;
         }
       }
 
@@ -402,7 +428,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -52%);
-        font-size: 22px;
+        font-size: 40px;
         letter-spacing: 0.18em;
         color: #ffe9fb;
         text-shadow:
@@ -494,13 +520,13 @@
         <div class="envelope" id="envelope">
           <div class="env-base"></div>
           <div class="env-inner">
-            <div class="env-greetings-main">致 · 叶佳颖</div>
-            <div class="env-greetings-sub">有一封小小的心意想给你</div>
+            <div class="env-greetings-main">赐 · 叶佳颖</div>
+            <div class="env-greetings-sub">有一封皇帝诏书给你</div>
           </div>
           <div class="env-heart-stamp">❤</div>
           <div class="env-open-tip">
             <span class="env-open-tip-dot"></span>
-            <span>点击打开爱心信封</span>
+            <span>点击接旨</span>
             <span class="env-open-tip-dot"></span>
           </div>
         </div>
@@ -511,7 +537,7 @@
         <div class="rain-layer" id="rain-layer"></div>
 
         <div class="center">
-          <div class="heart-wrapper" aria-hidden="true">
+          <div class="heart-wrapper" id="heart-wrapper" aria-hidden="true">
             <svg viewBox="0 0 100 90" preserveAspectRatio="xMidYMid meet">
               <!-- 使用平滑的爱心路径，方便描边动画 -->
               <path
@@ -550,32 +576,37 @@
     <script>
       /**
        * 竖排字符雨：在屏幕宽度范围内随机生成多列，
-       * 每列用 LOVE / 爱 / V 等字符组成，持续往下流动。
        */
       function createRain() {
         const rainLayer = document.getElementById("rain-layer");
         if (!rainLayer) return;
 
-        const charset = ["L", "O", "V", "E", "爱", "V", "U"];
-        const colCount = 18; // 列数，手机上效果适中
+        const charset = ["❤", "LOVE", "❤", "❤"];
+        const colCount = 26; // 列数更多，雨更密集
         const layerWidth = rainLayer.clientWidth || window.innerWidth;
 
         for (let i = 0; i < colCount; i++) {
           const col = document.createElement("div");
           col.className = "column";
 
-          const x = (i + Math.random() * 0.6) * (layerWidth / colCount);
+          const x = (i + Math.random() * 0.8) * (layerWidth / colCount);
           col.style.left = x + "px";
 
-          const length = 18 + Math.floor(Math.random() * 10);
+          const length = 24 + Math.floor(Math.random() * 14); // 一列更长
           let text = "";
           for (let j = 0; j < length; j++) {
             text += charset[Math.floor(Math.random() * charset.length)];
           }
           col.textContent = text;
 
-          const duration = 6 + Math.random() * 6; // 6-12 秒
+          const duration = 7 + Math.random() * 7; // 7-14 秒，略慢一点更清晰
           const delay = -Math.random() * duration; // 负延迟实现交错
+
+          // 每一列再随机一点尺寸和透明度，增强层次
+          const fontSize = 16 + Math.random() * 10; // 16-26px
+          const opacity = 0.35 + Math.random() * 0.3;
+          col.style.fontSize = fontSize + "px";
+          col.style.opacity = opacity.toFixed(2);
 
           col.style.animationDuration = duration + "s";
           col.style.animationDelay = delay + "s";
@@ -603,14 +634,14 @@
         const floatLayer = document.getElementById("float-layer");
         if (!floatLayer) return;
 
-        const count = 60; // 数量更多一点，铺满整个屏幕
+        const count = 110; // 数量更多一点，几乎铺满整个屏幕
         const width = floatLayer.clientWidth || window.innerWidth;
         const height = floatLayer.clientHeight || window.innerHeight;
 
         for (let i = 0; i < count; i++) {
           const el = document.createElement("div");
-          el.className = "float-item" + (Math.random() > 0.5 ? " love-text" : "");
-          el.textContent = Math.random() > 0.5 ? "❤" : "LOVE";
+          el.className = "float-item";
+          el.textContent = "❤";
 
           const x = Math.random() * width;
           const delay = -Math.random() * 12;
@@ -637,10 +668,39 @@
         const screenEnvelope = document.getElementById("screen-envelope");
         const screenHeart = document.getElementById("screen-heart");
         const bgm = document.getElementById("bgm");
+        const heartWrapper = document.getElementById("heart-wrapper");
 
         if (!envelope || !screenEnvelope || !screenHeart) return;
 
         let opened = false;
+        let burstTimer = null;
+
+        // 从大爱心中心“蹦出”一圈小爱心
+        function createHeartBurst() {
+          if (!heartWrapper) return;
+
+          const count = 10;
+          for (let i = 0; i < count; i++) {
+            const span = document.createElement("span");
+            span.className = "heart-pop";
+            span.textContent = "❤";
+
+            // 以圆形随机角度向外扩散
+            const angle = (Math.PI * 2 * i) / count + Math.random() * 0.6;
+            const distance = 30 + Math.random() * 40;
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance * -1; // 大部分往上飘
+
+            span.style.setProperty("--dx", dx.toFixed(1) + "px");
+            span.style.setProperty("--dy", dy.toFixed(1) + "px");
+
+            span.addEventListener("animationend", () => {
+              span.remove();
+            });
+
+            heartWrapper.appendChild(span);
+          }
+        }
 
         function openCard() {
           if (opened) return;
@@ -654,6 +714,9 @@
 
           // 初始化字符雨
           createRain();
+          // 初始化一组爱心爆开效果，并与心跳节奏一起循环
+          createHeartBurst();
+          burstTimer = setInterval(createHeartBurst, 2400);
 
           // 用户交互后尽量播放音乐（若被浏览器拦截也不会报错）
           if (bgm && typeof bgm.play === "function") {
